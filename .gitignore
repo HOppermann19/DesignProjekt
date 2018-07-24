@@ -36,5 +36,5 @@
 *.ps
 # Citavi
 #############################
-!Citavi\*.pdf
-!Citavi\Design-Hauptseminar\Citavi Attachments\*.pdf
+!Citavi/*.pdf
+!Citavi/Design-Hauptseminar/Citavi Attachments/*.pdf
