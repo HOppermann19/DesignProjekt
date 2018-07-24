@@ -1,0 +1,84 @@
+%\usepackage[toc,page]{appendix} % Anhang
+\appendix
+\renewcommand*\thesection{\Alph{section}}
+\renewcommand*\thesubsection{\Alph{section}.{\arabic{subsection}}}
+\renewcommand*\thefigure{\Alph{section}.{\arabic{figure}}}
+\renewcommand*\thetable{\Alph{section}.{\arabic{table}}}
+\renewcommand*\theequation{\Alph{section}.{\arabic{equation}}}
+% ########################################################################################################
+\chapter*{Appendix}
+\addcontentsline{toc}{chapter}{Appendix}
+\markboth{Appendix}{Appendix}
+% ########################################################################################################
+\section{Basics}
+
+
+%\footnotetext{Erstellt von Jakov, basierend auf der Arbeit von Yaddah. Schema eines menschlichen Herzens. Mittels \textit{Inkscape} von svg zu pdf konvertiert. \url{https://commons.wikimedia.org/wiki/File:Diagram_of_the_human_heart_(cropped)_de.svg} zuletzt geprüft am 18.02.2018}
+
+% ########################################################################################################
+\newpage
+\section{Methodology}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+\setcounter{equation}{0}
+% ----------------------------------------------------------------------------------------------------
+% ------------ Parameter
+% ----------------------------------------------------------------------------------------------------
+\subsection*{Parameter}
+\label{sec:Parameter}
+In diesem Kapitel sollen die modellbeschreibenden Parameter des CoolLoop\SymbReg{} Kathetermodells ausführlich erklärt werden.
+\textbf{$rr\_i$} beschreibt den Innenradius des Katheters und wird vom Zentrum aus gemessen, wo hingegen \textbf{$rr\_o$} den Außenradius beschreibt. Die Tiefe der myokardialen Gewebsschicht, gemessen an der Kontaktfläche zum Blut, wird durch \textbf{$myo\_thick$} angegeben. Die gesamte Breite des Modells wird an der epikardialen Kante abgetragen und durch \textbf{$myo\_width$} bestimmt. Der Parameter \textbf{$ins\_depth$} gibt an, wie tief der Katheter in das Myokard eindringt. Die konstante Blutschichtdicke zum Gewebe und Katheter wird mittels $blood\_thick$ gekennzeichnet. Der Radius der geöffneten CoolLoop\SymbReg{} Schlaufe (vergleiche Abbildung ) kann durch \textbf{$rr\_loop$} variiert werden. Mittels $num\_app\_layers$ kann eine Mindestanzahl an Elementen gegeben werden, die bei der Mesherzeugung zwischen innerer und äußerer Katheterwand generiert werden. Durch eine größere Anzahl an Elementen kann der Temperaturverlauf im CoolLoop\SymbReg{} besser dargestellt werden. Die Lage des Katheters zur Pulmonalvene wird durch \textbf{$rot\_ang\_myo$} festgelegt. Abschnitt beschäftigt sich ausführlich mit dieser Thematik. Die gesamte aktive beziehungsweise inaktive Länge des Gesamtkatheters wird durch \textbf{$loop\_active\_length$} beziehungsweise \textbf{$loop\_inactive\_length$} angegeben. Die Meshauflösung der Bereiche kann durch \textbf{$res\_blood$} (Blut), \textbf{$res\_myo$}(Gewebe) und \textbf{$res\_appl$} (CoolLoop\SymbReg) definiert werden. Je kleiner der Wert, umso besser die Auflösung.
+
+% ----------------------------------------------------------------------------------------------------
+% ------------ Randbedingungen
+% ----------------------------------------------------------------------------------------------------
+\newpage
+\subsection*{Randbedingungen}
+\label{sec:Randbedingungen}
+Dieser Abschnitt soll eine Erklärung der in den hier auftretenden Simulationen vorkommenden Randbedingungen liefern. Da ein Modell einen abgekapselten Teil eines größeren Ganzen darstellt, müssen an den Rändern $u$ [\SI{}{\celsius}] Regeln festgelegt werden, welche Wechselwirkungen hier stattfinden. Im einfachsten Fall einer \textbf{Dirichlet Randbedingung} nach Gleichung \ref{eq:11_Dirichlet} wird eine konstante Temperatur $u_D$ [\SI{}{\celsius}] am Rand abgebildet.
+\begin{equation}
+\label{eq:11_Dirichlet}
+u = u_D
+\end{equation}
+
+Eine andere Form stellt die \textbf{Neumann Randbedingung} in Gleichung \ref{eq:11_Neumann} dar, wobei hier ein konstanter Wärmestrom $N$ [\SI{}{W.m{-2}}] modelliert wird - gegeben durch eine konstante Ableitung in Richtung der nach außen gerichteten Flächennormalen $\vec{n_r}$, mit der Wärmeleitfähigkeit $\lambda$ [\SI{}{W.m^{-1}.K^{-1}}].
+\begin{equation}
+\label{eq:11_Neumann}
+-\lambda \frac{\partial u}{\partial\vec{n_r}} = N
+\end{equation}
+Im Fall $N = \SI{0}{W.m^{-2}}$ liegt vollständige Isolation vor und es erfolgt kein Wärmeaustausch über den Rand. Hier spricht man von einer \textbf{homogenen Neumann Randbedingung}.
+
+Zu guter Letzt stellt die \textbf{Robin Randbedingung} einen abhängigen Austausch dar, durch eine Gewichtung der Ableitung am Rand in Gleichung \ref{eq:11_Robin}. Dies wird mittels dem Wärmeübergangskoeffizient $\alpha$  [\SI{}{W.m^{-2}.K^{-1}}] und der externen Temperatur $u_c$ [\SI{}{\celsius}] realisiert. 
+\begin{equation}
+\label{eq:11_Robin}
+-\lambda \frac{\partial u}{\partial\vec{n_r}} = \alpha(u-u_c)
+\end{equation}
+
+
+% ----------------------------------------------------------------------------------------------------
+% ########################################################################################################
+\newpage
+\section{Results}
+\setcounter{figure}{0}
+\setcounter{table}{0}
+% ----------------------------------------------------------------------------------------------------
+% ------------ Äquidistanter Abstand
+% ----------------------------------------------------------------------------------------------------
+\begin{table} [!h]
+\caption{Geometriegrößen des Modells bei Variation der Eindringtiefe}
+\begin{center}
+\begin{tabular}{ccccccc}
+\toprule 
+Eindr. [\SI{}{\milli\metre}]& Blut [\SI{}{\cubic\milli\metre}] & Gewebe [\SI{}{\cubic\milli\metre}] & \textbf{h} [\SI{}{\square\milli\metre}] & \textbf{f} [\SI{}{\square\milli\metre}] & Appl. [\SI{}{\cubic\milli\metre}] & \textbf{d} [\SI{}{\square\milli\metre}]\\ 
+\midrule[1.5pt] 
+0.533235 & 79.619 & 69.505 & 30.925 & 35.737 & 1.885 & 12.065 \\ \midrule
+0.05 & 87.940 & 73.713 & 31.815 & 37.714 & 1.884 & 12.064 \\ \midrule
+-0.05 & 90.112 & 74.237 & 32.000 & 38.148 & 1.885 & 12.065 \\ \midrule
+-0.1 & 91.243 & 74.467 & 32.092 & 38.367 & 1.885 & 12.065 \\ \midrule
+-0.2 & 93.533 & 74.933 & 32.276 & 38.813 & 1.885 & 12.065 \\ \midrule
+-0.4 & 98.203 & 75.849 & 32.644 & 39.734 & 1.885 & 12.065 \\ 
+\bottomrule 
+\end{tabular} 
+\end{center}
+\label{tab:11_DistanzEigenschaften}
+\end{table}

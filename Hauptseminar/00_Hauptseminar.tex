@@ -1,0 +1,128 @@
+%Dokumentklasse
+\documentclass[a4paper, toc=listof, toc=bib, 12pt]{scrreprt}
+\usepackage[left= 2.5cm,right = 2cm, bottom = 4 cm]{geometry}
+%\usepackage[onehalfspacing]{setspace}
+% ============= Packages =============
+
+% Dokumentinformationen
+\usepackage[
+	pdftitle={Hauptseminar}, %TODO Thema!
+	pdfsubject={},
+	pdfauthor={Hannes Oppermann, Felix Wichum},
+	pdfkeywords={},	
+	%Links nicht einrahmen
+	hidelinks
+]{hyperref}
+
+
+% Standard Packages
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx, subfig}
+\graphicspath{Bilder/Diskussion} %TODO Pfad
+\usepackage{fancyhdr}
+\usepackage{lmodern}
+\usepackage{color}
+\usepackage{import}
+\usepackage{transparent}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{siunitx} % Einheiten
+\usepackage{acronym} % Abkürzungen
+\usepackage{subfig} % Subfigures
+\usepackage{svg}
+\usepackage[toc,page]{appendix} % Anhang
+\usepackage{multirow}
+\usepackage{booktabs}
+\usepackage{setspace}
+
+% zusätzliche Schriftzeichen der American Mathematical Society
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+%nicht einrücken nach Absatz
+\setlength{\parindent}{0pt}
+
+
+% ============= Kopf- und Fußzeile =============
+\pagestyle{fancy}
+%
+\lhead{}
+\chead{}
+\rhead{\slshape \leftmark}
+%%
+\lfoot{}
+\cfoot{\thepage}
+\rfoot{}
+%%
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% ============= Package Einstellungen & Sonstiges ============= 
+%Besondere Trennungen
+\hyphenation{De-zi-mal-tren-nung}
+
+% Registered definieren
+\def\SymbReg{\textsuperscript{\textregistered}}
+
+% Textumbruch in *.pdf_tex
+\newcommand{\CM}[1]{\makebox[0pt]{\begin{tabular}{l}#1\end{tabular}}}
+
+% Textumbruch in Tabelle
+\newcommand{\braketab}[1]{\begin{tabular}[x]{@{}c@{}}#1\end{tabular}}
+
+% neuer Zeilentyp
+\newcolumntype{C}[1]{>{\centering\arraybackslash}p{#1}}
+
+% leere Seite zum Füllen
+\newcommand{\emptyPage}{\newpage\thispagestyle{empty}\quad\newpage}
+
+
+% ============= Dokumentbeginn =============
+\begin{document}
+%Seiten ohne Kopf- und Fußzeile sowie Seitenzahl
+\pagestyle{empty}
+\include{01_Cover}
+\newpage 
+\thispagestyle{empty}
+\quad  \addtocounter{page}{+2}
+\newpage
+\pagenumbering{Roman} \addtocounter{page}{+2}
+\include{02_Abstract}
+\emptyPage
+% pagestyle für gesamtes Dokument aktivieren
+\pagestyle{fancy}
+% Verzeichnisse (Tabellen, Bilder, Abkürzungen, ...)
+\include{03_Lists}
+\emptyPage
+
+
+\pagenumbering{arabic} 
+\include{04_Introduction}
+\emptyPage
+\include{05_Basics}
+\emptyPage
+\include{06_Methodology}
+\emptyPage
+\include{07_Results}
+\emptyPage
+\include{08_Discussion}
+\emptyPage
+\include{09_Outlook}
+\emptyPage
+
+
+%Literaturverzeichnis
+\bibliographystyle{unsrtdin}
+%\bibliographystyle{natdin}
+\pagenumbering{Roman}
+%TODO Achtung, richtige Zahl einsetzen!
+\setcounter{page}{15}
+\bibliography{Literature}
+
+\include{10_Appendix}
+\emptyPage
+\include{11_Declaration}
+
+\end{document}
